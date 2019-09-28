@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>商品添加</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<ol class="breadcrumb">
+    <li>首页</li>
+    <li style="color:#337ab7;">商品添加</li>
+</ol>
+<form>
+    <div class="form-group">
+        <label for="exampleInputEmail2">商品所属分类</label>
+        <select class="form-control" id="exampleInputEmail2" name="cid">
+            <?php
+              foreach ($result as $value){
+            ?>
+            <option value="<?php echo $value['id']; ?>">  <?php echo $value['cname']; ?> </option>
+            <?php  }  ?>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">商品名称</label>
+        <input type="text" name="gname" class="form-control" id="exampleInputEmail1" placeholder="商品名称">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">市场价格</label>
+        <input type="number" name="mprice" class="form-control" id="exampleInputPassword1" placeholder="市场价">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword2">零售价</label>
+        <input type="number" name="sale" class="form-control" id="exampleInputPassword2" placeholder="零售价">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword3">库存</label>
+        <input type="number" name="stock" class="form-control" id="exampleInputPassword3" placeholder="库存">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword4">商品详情</label>
+        <textarea name="detail" class="form-control" id="exampleInputPassword4" placeholder="商品详情"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword5">商品缩略图: <span>比例：1*1,最佳尺寸200*200,</span></label>
+        <input type="file"  accept="image/*" class="form-control" id="exampleInputPassword5"
+               placeholder="库存">
+    </div>
+    <div class="form-group">
+        <input type="hidden" name="thumb">
+        <label for="exampleInputPassword5" style="visibility: hidden">商品缩略图</label>
+        <img src="" alt="" id="thumb" width="200">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword6">商品轮播</label>
+        <input type="file" multiple accept="image/*" class="form-control" id="exampleInputPassword6"
+               placeholder="库存">
+    </div>
+    <div class="form-group " id="banner">
+        <input type="hidden" name="banner">
+        <label for="exampleInputPassword5" style="visibility: hidden">商品缩略图</label>
+
+    </div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+<script>
+    // change  input    focus  blur  单图
+    $('input[id=exampleInputPassword5]').on('change', function () {
+        let file = this.files[0];
+        let formdata = new FormData();
+        formdata.append('file', file);
+        $.ajax({
+            url: 'upload.php',
+            type: 'POST',
+            data: formdata,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function (res) {
+                if (res.code == 200) {
+                    $('#thumb').attr('src',res.data);
+                    $('input[name=thumb]').val(res.data);
+                } else {
+                    console.log(res.msg);
+                }
+            }
+        })
+    });
+
+   // 多图上传
+    $('input[id=exampleInputPassword6]').on('change',function(){
+        let file = this.files;
+
+        for(let i=0;i<file.length;i++){
+            let formdata = new FormData();
+            formdata.append('file',file[i]);
+            $.ajax({
+                url: 'upload.php',
+                type: 'POST',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code == 200) {
+                        let src = res.data;
+                        $('<img>').appendTo('#banner').attr('src',src).css('width',200);
+                        let bannerInput = $('input[name=banner]');
+                        /*bannerInput.val(function(index,value){
+                            console.log(value);
+                            return value+src+',';
+                        });*/
+                        bannerInput.val((index,value)=>value+src+',');
+                    } else {
+                        console.log(res.msg);
+                    }
+                }
+            })
+        }
+
+
+
+    })
+
+
+    $('form').on('submit', function (e) {
+        e.preventDefault();
+        // 序列 控件包含在form
+        // let qs = $(this).serialize();
+
+        // 1. 空
+        /*let formdata = new FormData();
+        formdata.append('names','zhangsan');*/
+        // 2. form预置数据
+        let formdata = new FormData(this);
+        /*let qs = $(this).serialize();*/
+        $.ajax({
+            type: 'POST',
+            url: 'goodsinsert.php',
+            data: formdata,
+            processData: false,
+            contentType: false,
+            dataType: 'json',
+            success: function (res) {
+                console.log(res);
+            }
+        })
+        /* $.ajax({
+            type:'POST',
+            url:'goodsinsert.php',
+            data:qs,
+            dataType:'json',
+            success:function(res){
+                console.log(res);
+            }
+         })
+ */
+    })
+
+</script>
+</body>
+</html>

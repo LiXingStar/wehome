@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        h1{
+            text-align: center;
+            font-size: 20px;
+        }
+        h2{
+            text-align: center;
+            letter-spacing: 5px;
+            font-weight: bolder;
+        }
+        p{
+            text-align: right;
+            line-height: 40px;
+        }
+        .auto{
+            width: 100%;
+            max-height: 400px;
+            overflow-y: auto;
+            box-shadow: 0 0 2px #ccc;
+        }
+        table {
+            width: 100%;
+            border: 2px solid #333;
+            box-sizing: border-box;
+        }
+        td{
+            height: 35px;
+            padding: 0 5px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="paperAnalysisDetail-view" v-if="paperInfo">
+    <h1>吕梁学院{{paperInfo.termname}}</h1>
+    <h2>试卷分析表</h2>
+    <p>时间：{{paperInfo.starttime}}</p>
+
+        <table cellpadding="0" cellspacing="0" border="1">
+            <tr>
+                <th colspan="8">吕梁学院计算机系  </th>
+            </tr>
+            <tr>
+                <th colspan="8">试卷分析  </th>
+            </tr>
+            <tr>
+                <td colspan="8" align="right">时间：2019/09/27  </td>
+            </tr>
+            <tr>
+                <td>系别</td>
+                <td>{{paperInfo.dname}}</td>
+                <td>专业</td>
+                <td>{{paperInfo.majorname}}</td>
+                <td>班级</td>
+                <td>{{paperInfo.classname}}</td>
+                <td>课    程</td>
+                <td>{{paperInfo.coursename}}</td>
+            </tr>
+            <tr>
+                <td>应考人数</td>
+                <td>{{paperInfo.totalpeople}}</td>
+                <td colspan="2">实考人数</td>
+                <td colspan="2">{{testPeople}}</td>
+                <td>考试时间</td>
+                <td>{{paperInfo.testtime}}</td>
+            </tr>
+            <tr>
+                <td rowspan="5">成绩统计</td>
+                <td colspan="3">
+                    60—70分   6人    占    15.38％
+                </td>
+                <td colspan="4">
+                    60—70分   6人    占    15.38％
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    80—90分      8人   占 20.51％
+                </td>
+                <td colspan="4">
+                    60分以下   11人   占    28.21％
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    70—80分      12人  占 30.77%
+                </td>
+                <td colspan="4">
+
+                </td>
+            </tr>
+            <tr>
+                <td>试题难度</td>
+                <td colspan="2">适中</td>
+                <td colspan="2">平均分</td>
+                <td colspan="2">68.4</td>
+            </tr>
+            <tr>
+                <td>最高分</td>
+                <td colspan="2">98</td>
+                <td colspan="2">最低分</td>
+                <td colspan="2">27</td>
+            </tr>
+            <tr>
+                <td rowspan="2">教学质量分析</td>
+                <td colspan="7">
+                    1、学生对哪些知识掌握较好，哪些较差？        3、有什么经验或教训？
+                    <br>
+                    2、教学质量有哪些提高，具体反映在哪里？      4、对今后教学的改进意见。
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7">
+                    {{paperAnalysisDeForm.quality_analy}}
+                    <p>任课教师签名</p>
+                    <p>2019年7月8日</p>
+                </td>
+            </tr>
+            <tr>
+                <td>系意见</td>
+                <td colspan="7">
+                    <p>系主任签章</p>
+                    <p>年&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;日</p>
+                </td>
+            </tr>
+        </table>
+</div>
+
+</body>
+</html>

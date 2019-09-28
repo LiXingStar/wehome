@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>导航展示</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<style>
+    table input {
+        border: none;
+        outline: none;
+    }
+</style>
+<body>
+<ol class="breadcrumb">
+    <li>首页</li>
+    <li style="color:#337ab7;">导航展示</li>
+</ol>
+
+<table class="table table-striped  <?php echo count($result)?'':'hidden' ; ?> ">
+    <thead>
+    <tr>
+        <th>导航名称</th>
+        <th>导航英文名称</th>
+        <th>导航排序</th>
+        <th>导航模板</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--
+    -->
+    <?php
+           foreach ($result as $key=>$value){
+    ?>
+    <tr id="<?php  echo $value['id'];?>">
+        <td><input type="text" name="nname" data-class="name" data-values="<?php  echo $value['nname']; ?>"
+                   value="<?php  echo $value['nname']; ?>"></td>
+        <td><input type="text" name="ename" data-class="ename" data-values="<?php  echo $value['ename']; ?>"
+                   value="<?php  echo $value['ename']; ?>"></td>
+        <td><input type="text" name="nsort" data-class="nsort" data-values="<?php  echo $value['nsort']; ?>"
+                   value="<?php  echo $value['nsort']; ?>"></td>
+        <td><input type="text" name="ntpl" data-class="ntpl" data-values="<?php  echo $value['ntpl']; ?>"
+                   value="<?php  echo $value['ntpl']; ?>"></td>
+        <td>
+            <button class="btn">删除</button>
+        </td>
+
+    </tr>
+    <?php
+          }
+        ?>
+
+
+    </tbody>
+</table>
+<div class="<?php echo count($result)?'hidden':'' ; ?>">
+    暂无数据
+</div>
+<script>
+    //
+    $('tbody').on('blur', 'input', function () {
+        //
+        let value = this.value.trim();
+        let type = this.name;
+        let id = $(this).closest('tr').attr('id');
+        let oldvalue = this.dataset.values
+
+        //1. value === oldvalue   2. 空值
+        value.length && oldvalue != value && $.ajax({
+            url: 'navupdate.php',
+            type: 'POST',
+            data: {id, type, value},
+            dataType: 'json',
+            context: this,
+            success: function (res) {
+                if (res.code == 200) {
+                    alert(res.msg);
+                } else {
+                    alert(res.msg);
+                    this.value = oldvalue;
+                }
+            }
+        });
+        value.length || (this.value = oldvalue);
+
+    })
+</script>
+</body>
+</html>
