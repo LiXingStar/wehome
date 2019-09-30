@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<ol class="breadcrumb">
+    <li>首页</li>
+    <li style="color:#337ab7;">商品添加</li>
+</ol>
+<form>
+    <div class="form-group">
+        <label for="exampleInputEmail2">商品所属分类</label>
+        <select class="form-control" id="exampleInputEmail2" name="cid">
+            <?php
+              foreach ($result as $value){
+            ?>
+            <option value="<?php echo $value['id']; ?>"
+               <?php echo $goods['cid']== $value['id']?'selected':''  ?>
+            >
+                <?php echo $value['cname']; ?>
+            </option>
+            <?php  }  ?>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">商品名称</label>
+        <input type="text" name="gname" value="<?php echo $goods['gname']; ?>" class="form-control" id="exampleInputEmail1" placeholder="商品名称">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">市场价格</label>
+        <input type="number" name="mprice" value="<?php echo $goods['mprice']; ?>" class="form-control" id="exampleInputPassword1" placeholder="市场价">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword2">零售价</label>
+        <input type="number" name="sale" value="<?php echo $goods['sale']; ?>" class="form-control" id="exampleInputPassword2" placeholder="零售价">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword3">库存</label>
+        <input type="number" name="stock" value="<?php echo $goods['stock']; ?>" class="form-control" id="exampleInputPassword3" placeholder="库存">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword4">商品详情</label>
+        <textarea name="detail" class="form-control" id="exampleInputPassword4" placeholder="商品详情">value="<?php echo $goods['detail']; ?>"</textarea>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword5">商品缩略图: <span>比例：1*1,最佳尺寸200*200,</span></label>
+        <input type="file" accept="image/*" class="form-control" id="exampleInputPassword5"
+               placeholder="库存">
+    </div>
+    <div class="form-group">
+        <input type="hidden" name="thumb" value="<?php echo $goods['thumb']; ?>">
+        <label for="exampleInputPassword5" style="visibility: hidden">商品缩略图</label>
+        <img src="<?php echo $goods['thumb']; ?>" alt="" id="thumb" width="100">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword6">商品轮播</label>
+        <input type="file" multiple accept="image/*" class="form-control" id="exampleInputPassword6"
+               placeholder="库存">
+    </div>
+    <div class="form-group " id="banner">
+        <input type="hidden" name="banner" value="<?php echo $goods['banner']; ?>">
+        <label for="exampleInputPassword5" style="visibility: hidden">商品缩略图</label>
+        <?php
+        $arr = explode(',',$goods['banner']);
+        $count = count($arr);
+        for($i=0;$i<$count;$i++){
+?>
+        <img src="<?php echo $arr[$i];?>" alt="" width="100">
+        <?php }?>
+    </div>
+    <input type="hidden" name="gid" value="<?php echo $goods['gid'];?>">
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+<script>
+    console.log(location);
+    $('form').on('submit',function(e){
+        e.preventDefault();
+        let qs = $(this).serialize();
+        // 1. location.search  qs+='&gid='+gid;
+        $.ajax({
+            url:'goodsupdate.php',
+            type:'POST',
+            data:qs,
+            dataType:'json',
+            success:function(res){
+                console.log(res);
+            }
+        })
+    })
+</script>
+</body>
+</html>

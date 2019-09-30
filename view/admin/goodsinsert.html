@@ -45,7 +45,7 @@
     </div>
     <div class="form-group">
         <label for="exampleInputPassword5">商品缩略图: <span>比例：1*1,最佳尺寸200*200,</span></label>
-        <input type="file"  accept="image/*" class="form-control" id="exampleInputPassword5"
+        <input type="file" accept="image/*" class="form-control" id="exampleInputPassword5"
                placeholder="库存">
     </div>
     <div class="form-group">
@@ -72,31 +72,42 @@
         let file = this.files[0];
         let formdata = new FormData();
         formdata.append('file', file);
-        $.ajax({
-            url: 'upload.php',
-            type: 'POST',
-            data: formdata,
-            processData: false,
-            contentType: false,
-            dataType: 'json',
-            success: function (res) {
-                if (res.code == 200) {
-                    $('#thumb').attr('src',res.data);
-                    $('input[name=thumb]').val(res.data);
-                } else {
-                    console.log(res.msg);
+        // 同步的方式 写异步
+        let promise = new Promise(function (resolve, reject) {
+            $.ajax({
+                url: 'upload.php',
+                type: 'POST',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function (res) {
+                    if (res.code == 200) {
+                        resolve(res);
+                    } else {
+                        reject(res.msg);
+                        // console.log(res.msg);
+                    }
                 }
-            }
+            })
+        });
+
+        promise.then(function (res) {
+            $('#thumb').attr('src', res.data);
+            $('input[name=thumb]').val(res.data);
+        }, function () {
+
         })
+
     });
 
-   // 多图上传
-    $('input[id=exampleInputPassword6]').on('change',function(){
-        let file = this.files;
 
-        for(let i=0;i<file.length;i++){
+    // 多图上传
+    $('input[id=exampleInputPassword6]').on('change', function () {
+        let file = this.files;
+        for (let i = 0; i < file.length; i++) {
             let formdata = new FormData();
-            formdata.append('file',file[i]);
+            formdata.append('file', file[i]);
             $.ajax({
                 url: 'upload.php',
                 type: 'POST',
@@ -107,22 +118,19 @@
                 success: function (res) {
                     if (res.code == 200) {
                         let src = res.data;
-                        $('<img>').appendTo('#banner').attr('src',src).css('width',200);
+                        $('<img>').appendTo('#banner').attr('src', src).css('width', 200);
                         let bannerInput = $('input[name=banner]');
                         /*bannerInput.val(function(index,value){
                             console.log(value);
                             return value+src+',';
                         });*/
-                        bannerInput.val((index,value)=>value+src+',');
+                        bannerInput.val((index, value) => value + src + ',');
                     } else {
                         console.log(res.msg);
                     }
                 }
             })
         }
-
-
-
     })
 
 
@@ -136,6 +144,7 @@
         formdata.append('names','zhangsan');*/
         // 2. form预置数据
         let formdata = new FormData(this);
+        formdata.set('banner', formdata.get('banner').slice(0, -1));
         /*let qs = $(this).serialize();*/
         $.ajax({
             type: 'POST',
@@ -159,6 +168,7 @@
          })
  */
     })
+
 
 </script>
 </body>

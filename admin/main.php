@@ -141,7 +141,7 @@
     </div>
 </aside>
 <main>
-    <iframe src="goodsinsert.php" frameborder="0" name="right"></iframe>
+    <iframe src="goodsselect.php" frameborder="0" name="right"></iframe>
 </main>
 <script>
     $('.panel-heading').on('click',function(){

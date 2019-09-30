@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0bfafd78-d280-468c-a92e-ecb776fbe0df" name="Default Changelist" comment="" />
+    <list default="true" id="0bfafd78-d280-468c-a92e-ecb776fbe0df" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/goodsupdate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/index/category.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/index/header.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/index/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/index/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/view/index/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/goodselect.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/goodsselect.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/navselect.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin/navselect.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common.php" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/view/admin/goodsinsert.html" beforeDir="false" afterPath="$PROJECT_DIR$/view/admin/goodsinsert.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wehome.md" beforeDir="false" afterPath="$PROJECT_DIR$/wehome.md" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,11 +36,15 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1RJNxWEhRIf1gSu8ZZKc6MQ8Yy4" />
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../lv-exam-end" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
@@ -62,10 +82,27 @@
       <workItem from="1569544578389" duration="14115000" />
       <workItem from="1569575574075" duration="8832000" />
       <workItem from="1569630976467" duration="10422000" />
+      <workItem from="1569717872889" duration="7875000" />
+      <workItem from="1569749283342" duration="2876000" />
+      <workItem from="1569756077965" duration="8000" />
+      <workItem from="1569803896545" duration="20064000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
